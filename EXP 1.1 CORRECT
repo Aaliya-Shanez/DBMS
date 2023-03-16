@@ -1,0 +1,172 @@
+ a) DDL COMMANDS-CREATE
+1.Create a table EMPLOYEE have the following fields (emp_id, name,city,dob,adhar_no)?
+
+create table EMPLOYEE(
+    -> emp_id int(15),
+    -> name varchar(30),
+    -> city varchar(20),
+    -> dob date,
+    -> adhar_no int(15)
+    -> );
+
+Query OK, 0 rows affected (0.27 sec)
+
+desc EMPLOYEE;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| emp_id   | int(15)         | YES  |     | NULL    |       |
+| name     | varchar(30) | YES  |     | NULL    |       |
+| city        | varchar(20) | YES  |     | NULL    |       |
+| dob        | date            | YES  |     | NULL    |       |
+| adhar_no | int(15)       | YES  |     |NULL
+
+5 rows in set (0.00 sec)
+
+2.Create a table STUDENT have the fields(roll_no, name, age, address, gender)and add following constraints on it.
+
+
+Roll_no – Primary key
+Name – does not allow null values
+Age- must be in between (0-99), does not allow null values
+Gender- default value is ‘m’?
+
+create table STUDENT(
+    -> roll_no primary key,
+    -> name varchar(25) Not null,
+    -> age int not null,
+    -> gender varchar(20) default 'm',
+    -> address varchar(35),
+    -> check(age<100)
+    -> );
+
+Query OK, 0 rows affected (0.26 sec)
+
+ desc STUDENT;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int(11)     | NO   | PRI | NULL    |       |
+| name    | varchar(25) | NO   |     | NULL    |       |
+| age     | int(11)     | NO   |     | NULL    |       |
+| gender  | varchar(20) | YES  |     | m       |       |
+| address | varchar(35) | YES  |     | NULL    |       |
+
+5 rows in set (0.01 sec)
+
+3. Create a temporary table STUDENT1 of STUDENT relation.?
+
+
+create temporary table STUDENT1 select * from STUDENT;
+
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+
+
+desc STUDENT1;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int(11)     | NO   |     | NULL    |       |
+| name    | varchar(25) | NO   |     | NULL    |       |
+| age     | int(11)     | NO   |     | NULL    |       |
+| gender  | varchar(20) | YES  |     | m       |       |
+| address | varchar(35) | YES  |     | NULL    |       |
+
+
+5 rows in set (0.00 sec)
+
+4. Create a duplicate table of EMPLOYEE.
+
+ create table if not exists EMPLOYEE_DUP select * from EMPLOYEE;
+
+Query OK, 0 rows affected (0.30 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+ desc EMPLOYEE_DUP;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| emp_id   | int(15)     | YES  |     | NULL    |       |
+| name     | varchar(30) | YES  |     | NULL    |       |
+| city     | varchar(20) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| adhar_no | int(15)     | YES  |     | NULL    |       |
+
+5 rows in set (0.00 sec)
+
+5.Create an INVOICE database and having following tables.
+
+Customer(id, name, address, city, ph_no)
+Product(pid, pname, price (default 0))
+Invoice_master(inv_id, cust_id(FK), inv_date)
+Invoice_item(inv_iD(FK),pid(FK), quantity)
+
+ CREATE DATABASE INVOICE;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> USE INVOICE;
+
+    create table Customer( id int(20) PRIMARY KEY, name varchar (25), address varchar(30), city varchar(20), ph_no int(11) );
+Query OK, 0 rows affected (0.24 sec)
+
+
+
+
+  DESC Customer;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| id      | int(20)     | NO   | PRI | NULL    |       |
+| name    | varchar(25) | YES  |     | NULL    |       |
+| address | varchar(30) | YES  |     | NULL    |       |
+| city    | varchar(20) | YES  |     | NULL    |       |
+| ph_no   | int(11)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> USE INVOICE;
+ create table Product( pid int(22) PRIMARY KEY, pname varchar(20),  price int default 0 );
+Query OK, 0 rows affected (0.22 sec)
+
+
+
+ desc Product;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| pid   | int(22)     | NO   | PRI | NULL    |       |
+| pname | varchar(20) | YES  |     | NULL    |       |
+| price | int(11)     | YES  |     | 0       |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> USE INVOICE;
+ create table INVOICE_MASTER(inv_id int primary key,id int,inv_date date,foreign key(id) references Customer(id));
+Query OK, 0 rows affected (0.30 sec)
+
+desc INVOICE_MASTER;
++----------+---------+------+-----+---------+-------+
+| Field    | Type    | Null | Key | Default | Extra |
++----------+---------+------+-----+---------+-------+
+| inv_id   | int(11) | NO   | PRI | NULL    |       |
+| id       | int(11) | YES  | MUL | NULL    |       |
+| inv_date | date    | YES  |     | NULL    |       |
++----------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+ 
+ mysql> USE INVOICE;
+ create table INVOICE_ITEM(inv_id int, pid int, quantity int,foreign key(inv_id) references INVOICE_MASTER(inv_id),foreign key(pid) references Product(pid));
+Query OK, 0 rows affected (0.45 sec)
+
+
+desc INVOICE_ITEM;
++----------+---------+------+-----+---------+-------+
+| Field    | Type    | Null | Key | Default | Extra |
++----------+---------+------+-----+---------+-------+
+| inv_id   | int(11) | YES  | MUL | NULL    |       |
+| pid      | int(11) | YES  | MUL | NULL    |       |
+| quantity | int(11) | YES  |     | NULL    |       |
++----------+---------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
