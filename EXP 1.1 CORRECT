@@ -1,7 +1,10 @@
+                                      EXP: 1.1 DDL COMMANDS
+                                      **********************
+ 
  a) DDL COMMANDS-CREATE
 1.Create a table EMPLOYEE have the following fields (emp_id, name,city,dob,adhar_no)?
 
-create table EMPLOYEE(
+MYSQL>create table EMPLOYEE(
     -> emp_id int(15),
     -> name varchar(30),
     -> city varchar(20),
@@ -170,3 +173,6 @@ desc INVOICE_ITEM;
 | quantity | int(11) | YES  |     | NULL    |       |
 +----------+---------+------+-----+---------+-------+
 3 rows in set (0.01 sec)
+
+
+//ADD MYSQL> BEFORE EACH QUERY
