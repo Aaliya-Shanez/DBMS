@@ -318,7 +318,7 @@ mysql> select * from Product;
 +-----+---------+-------------+-----------------+-------------+
 10 rows in set (0.00 sec)
 
-mysql> update Customer set address="parambil",city="perithalmanna",ph_no=123456778
+mysql> update Customer set address="parambil",city="perithalmanna",ph_no=123456778  where id=124;
 Query OK, 1 row affected (0.05 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
@@ -374,3 +374,160 @@ mysql> select * from INVOICE_ITEM;
 7 rows in set (0.00 sec)
 
 
+ c) DML COMMAND- DELETE
+ _______________________
+                      
+1. Delete the record of customer id ‘125’. 
+                     
+  mysql> select * from Customer;
++-----+---------+-------------+-----------------+-------------+
+| id  | name    | address     | city            | ph_no       |
++-----+---------+-------------+-----------------+-------------+
+| 120 | aaliya  | veede       | ktym            | 456465656   |
+| 121 | akshara | manakattu   | kozhikode       | 3454566770  |
+| 122 | nileena | palathinkal | kannur          | 3495854495  |
+| 123 | femi    | kuduimbam   | thrisssur       | 34545343400 |
+| 124 | hiba    | parambil    | perithalmanna   | 1234567780  |
+| 125 | hari    | nalukett    | palakkad        | 2345567800  |
+| 126 | kichu   | nalukatte   | perinthalmaanna | 3445667778  |
+| 127 | vysh    | koledathe   | malappuram      | 3433354400  |
+| 128 | aali    | baithul     | ktym            |             |
+| 129 | sallu   | baithul     | ktym            | NULL        |
++-----+---------+-------------+-----------------+-------------+
+10 rows in set (0.00 sec)
+
+mysql> DELETE FROM Customer WHERE id=125;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT * FROM Customer;
++-----+---------+-------------+-----------------+-------------+
+| id  | name    | address     | city            | ph_no       |
++-----+---------+-------------+-----------------+-------------+
+| 120 | aaliya  | veede       | ktym            | 456465656   |
+| 121 | akshara | manakattu   | kozhikode       | 3454566770  |
+| 122 | nileena | palathinkal | kannur          | 3495854495  |
+| 123 | femi    | kuduimbam   | thrisssur       | 34545343400 |
+| 124 | hiba    | parambil    | perithalmanna   | 1234567780  |
+| 126 | kichu   | nalukatte   | perinthalmaanna | 3445667778  |
+| 127 | vysh    | koledathe   | malappuram      | 3433354400  |
+| 128 | aali    | baithul     | ktym            |             |
+| 129 | sallu   | baithul     | ktym            | NULL        |
++-----+---------+-------------+-----------------+-------------+
+9 rows in set (0.00 sec)
+
+
+
+          
+2. Delete all purchase details of items its quantity less than 20.
+
+mysql> SELECT * FROM INVOICE_ITEM;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|     12 |   13 |       75 |
+|     12 |   13 |       75 |
+|     13 |   14 |       30 |
+|     14 |   15 |       10 |
+|     16 |   17 |       20 |
+|     17 |   18 |        5 |
++--------+------+----------+
+6 rows in set (0.00 sec)
+
+mysql> delete from INVOICE_ITEM WHERE quantity<20;
+Query OK, 2 rows affected (0.04 sec)
+
+mysql> SELECT * FROM INVOICE_ITEM;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|     12 |   13 |       75 |
+|     12 |   13 |       75 |
+|     13 |   14 |       30 |
+|     16 |   17 |       20 |
++--------+------+----------+
+4 rows in set (0.00 sec)
+
+
+
+3. Delete the purchase details of product ‘pen’ in the in_id ‘101’.
+mysql> SELECT * FROM Product;
++-----+--------+-------+
+| pid | pname  | price |
++-----+--------+-------+
+|  12 | book   |    51 |
+|  13 | pen    |   102 |
+|  14 | pencil |    51 |
+|  15 | box    |   102 |
+|  16 | bat    |   612 |
+|  17 | ball   |    41 |
+|  18 | baloon |    31 |
++-----+--------+-------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT * FROM INVOICE_ITEM;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|     12 |   13 |       75 |
+|     12 |   13 |       75 |
+|     13 |   14 |       30 |
+|     16 |   17 |       20 |
++--------+------+----------+
+4 rows in set (0.00 sec)
+
+mysql> delete from INVOICE_ITEM WHERE inv_id=13 and pid=14;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT * FROM INVOICE_ITEM;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|     12 |   13 |       75 |
+|     12 |   13 |       75 |
+|     16 |   17 |       20 |
++--------+------+----------+
+3 rows in set (0.00 sec)
+
+
+
+
+
+4. Delete details of employees who does not have phone number.
+
+mysql> SELECT * FROM Customer;;
++-----+---------+-------------+-----------------+-------------+
+| id  | name    | address     | city            | ph_no       |
++-----+---------+-------------+-----------------+-------------+
+| 120 | aaliya  | veede       | ktym            | 456465656   |
+| 121 | akshara | manakattu   | kozhikode       | 3454566770  |
+| 122 | nileena | palathinkal | kannur          | 3495854495  |
+| 123 | femi    | kuduimbam   | thrisssur       | 34545343400 |
+| 124 | hiba    | parambil    | perithalmanna   | 1234567780  |
+| 126 | kichu   | nalukatte   | perinthalmaanna | 3445667778  |
+| 127 | vysh    | koledathe   | malappuram      | 3433354400  |
+| 129 | sallu   | baithul     | ktym            | NULL        |
++-----+---------+-------------+-----------------+-------------+
+9 rows in set (0.00 sec)
+
+mysql> delete from Customer WHERE ph_no is NULL;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM Customer;
++-----+---------+-------------+-----------------+-------------+
+| id  | name    | address     | city            | ph_no       |
++-----+---------+-------------+-----------------+-------------+
+| 120 | aaliya  | veede       | ktym            | 456465656   |
+| 121 | akshara | manakattu   | kozhikode       | 3454566770  |
+| 122 | nileena | palathinkal | kannur          | 3495854495  |
+| 123 | femi    | kuduimbam   | thrisssur       | 34545343400 |
+| 124 | hiba    | parambil    | perithalmanna   | 1234567780  |
+| 126 | kichu   | nalukatte   | perinthalmaanna | 3445667778  |
+| 127 | vysh    | koledathe   | malappuram      | 3433354400  |
++-----+---------+-------------+-----------------+-------------+
+8 rows in set (0.00 sec)
+
+
+
+5. Delete all records from STUDENT table. 
+
+6. Delete Invoice details of a particular customer.
