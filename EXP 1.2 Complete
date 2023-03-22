@@ -489,9 +489,6 @@ mysql> SELECT * FROM INVOICE_ITEM;
 3 rows in set (0.00 sec)
 
 
-
-
-
 4. Delete details of employees who does not have phone number.
 
 mysql> SELECT * FROM Customer;;
@@ -529,5 +526,37 @@ mysql> SELECT * FROM Customer;
 
 
 5. Delete all records from STUDENT table. 
+mysql> USE aali;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_aali |
++----------------+
+| Customer       |
+| EMPLOYEE       |
+| INVOICE_MASTER |
+| STUDENT        |
+| book           |
+| student        |
++----------------+
+6 rows in set (0.00 sec)
+
+mysql> select *from STUDENT;
++---------+---------+------+--------+---------------+
+| roll_no | name    | age  | gender | address       |
++---------+---------+------+--------+---------------+
+|      10 | aaliya  |  100 | m      | asadsds       |
+|      11 | NILEENA |   24 | f      | fnsdjfhjsdkfj |
+|      12 | AALIYA  |   22 | f      | veede         |
+|      15 | kichu   |   21 | m      | dbhfhdjfh     |
+|      21 | HARI    |   22 | m      | fbsdhbfh      |
++---------+---------+------+--------+---------------+
+5 rows in set (0.00 sec)
+
+
+
 
 6. Delete Invoice details of a particular customer.
