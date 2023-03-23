@@ -556,7 +556,11 @@ mysql> select *from STUDENT;
 +---------+---------+------+--------+---------------+
 5 rows in set (0.00 sec)
 
+mysql> DELETE FROM STUDENT;
+Query OK, 5 rows affected (0.03 sec)
 
+mysql> select*from STUDENT;
+Empty set (0.00 sec)
 
 
 6. Delete Invoice details of a particular customer.
