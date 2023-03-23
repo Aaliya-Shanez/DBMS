@@ -564,3 +564,32 @@ Empty set (0.00 sec)
 
 
 6. Delete Invoice details of a particular customer.
+
+mysql> SELECT * FROM INVOICE_MASTER;
++--------+------+------------+
+| inv_id | id   | inv_date   |
++--------+------+------------+
+|     12 |  121 | 2023-01-20 |
+|     13 |  123 | 2023-01-10 |
+|     14 |  124 | 2023-01-23 |
+|     16 |  126 | 2023-02-13 |
+|     17 |  127 | 2023-03-15 |
++--------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> DELETE FROM INVOICE_MASTER WHERE ID=124;
+Query OK, 1 row affected (0.06 sec)
+
+mysql> SELECT * FROM INVOICE_MASTER;
++--------+------+------------+
+| inv_id | id   | inv_date   |
++--------+------+------------+
+|     12 |  121 | 2023-01-20 |
+|     13 |  123 | 2023-01-10 |
+|     16 |  126 | 2023-02-13 |
+|     17 |  127 | 2023-03-15 |
++--------+------+------------+
+4 rows in set (0.00 sec)
+
+
+
