@@ -179,10 +179,10 @@ Query OK, 0 rows affected (0.05 sec)
 mysql> CREATE USER 'USER2'@'localhost' IDENTIFIED BY 'mypass1';
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> GRANT INSERT,SELECT ON EMPLOYEE  TO 'USER1'@'localhost';
+mysql> GRANT INSERT,SELECT ON Customer TO 'USER1'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> GRANT DELETE,UPDATE  ON aali.* TO 'USER2'@'localhost';
+mysql> GRANT DELETE,UPDATE  ON INVOICE.* TO 'USER2'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
                 
                  mysql> show grants;
@@ -190,7 +190,7 @@ Query OK, 0 rows affected (0.00 sec)
 | Grants for USER1@localhost                                       |
 +------------------------------------------------------------------+
 | GRANT USAGE ON *.* TO 'USER1'@'localhost'                        |
-| GRANT SELECT, INSERT ON `aali`.`EMPLOYEE` TO 'USER1'@'localhost' |
+| GRANT SELECT, INSERT ON `INVOICE`.`Customer` TO 'USER1'@'localhost' |
 +------------------------------------------------------------------+
 2 rows in set (0.00 sec)
           
@@ -201,7 +201,7 @@ Query OK, 0 rows affected (0.00 sec)
 | Grants for USER2@localhost                              |
 +---------------------------------------------------------+
 | GRANT USAGE ON *.* TO 'USER2'@'localhost'               |
-| GRANT UPDATE, DELETE ON `aali`.* TO 'USER2'@'localhost' |
+| GRANT UPDATE, DELETE ON `INVOICE`.* TO 'USER2'@'localhost' |
 +---------------------------------------------------------+
 2 rows in set (0.00 sec)
            
@@ -209,7 +209,7 @@ Query OK, 0 rows affected (0.00 sec)
 2. REVOKE
  ->Remove delete privilege of user 2.
 
-mysql> REVOKE DELETE ON aali.* FROM 'USER2'@'localhost';
+mysql> REVOKE DELETE ON INVOICE.* FROM 'USER2'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 
                    
@@ -218,7 +218,7 @@ Query OK, 0 rows affected (0.00 sec)
 | Grants for USER2@localhost                      |
 +-------------------------------------------------+
 | GRANT USAGE ON *.* TO 'USER2'@'localhost'       |
-| GRANT UPDATE ON `aali`.* TO 'USER2'@'localhost' |
+| GRANT UPDATE ON `INVOICE`.* TO 'USER2'@'localhost' |
 +-------------------------------------------------+
 2 rows in set (0.01 sec)
          
