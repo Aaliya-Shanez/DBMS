@@ -1,0 +1,189 @@
+a) TCL COMMAND
+__________________
+
+1.    Commit
+           
+  mysql> SET AUTOCOMMIT=OFF;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> use aali;
+
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_aali |
++----------------+
+| Customer       |
+| EMPLOYEE       |
+| INVOICE_MASTER |
+| STUDENT        |
+| book           |
+| student        |
++----------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from EMPLOYEE;
++------+---------+---------+------+-----------+
+| SSN  | name    | city    | dob  | adhar_no  |
++------+---------+---------+------+-----------+
+|  101 | akshara | kolkata | 1998 |    234567 |
+|  102 | ALEEFA  | CHENNAI | 1999 |  23434345 |
+|  103 | NILEENA | KANNUR  | 1998 |   2343435 |
+|  104 | AALIYA  | EKM     | 2000 |  43545456 |
+|  105 | SREYA   | THRS    | 2001 | 324234235 |
++------+---------+---------+------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES(110,'FIDHA','MAHE',2000,23456789);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from EMPLOYEE;
++------+---------+---------+------+-----------+
+| SSN  | name    | city    | dob  | adhar_no  |
++------+---------+---------+------+-----------+
+|  101 | akshara | kolkata | 1998 |    234567 |
+|  102 | ALEEFA  | CHENNAI | 1999 |  23434345 |
+|  103 | NILEENA | KANNUR  | 1998 |   2343435 |
+|  104 | AALIYA  | EKM     | 2000 |  43545456 |
+|  105 | SREYA   | THRS    | 2001 | 324234235 |
+|  110 | FIDHA   | MAHE    | 2000 |  23456789 |
++------+---------+---------+------+-----------+
+6 rows in set (0.00 sec)
+
+         
+           
+2.    Rollback
+
+mysql> INSERT INTO EMPLOYEE VALUES(111,'ASWATHY','VADAKARA',1998,456789);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from EMPLOYEE;
++------+---------+----------+------+-----------+
+| SSN  | name    | city     | dob  | adhar_no  |
++------+---------+----------+------+-----------+
+|  101 | akshara | kolkata  | 1998 |    234567 |
+|  102 | ALEEFA  | CHENNAI  | 1999 |  23434345 |
+|  103 | NILEENA | KANNUR   | 1998 |   2343435 |
+|  104 | AALIYA  | EKM      | 2000 |  43545456 |
+|  105 | SREYA   | THRS     | 2001 | 324234235 |
+|  110 | FIDHA   | MAHE     | 2000 |  23456789 |
+|  111 | ASWATHY | VADAKARA | 1998 |    456789 |
++------+---------+----------+------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from EMPLOYEE;
++------+---------+---------+------+-----------+
+| SSN  | name    | city    | dob  | adhar_no  |
++------+---------+---------+------+-----------+
+|  101 | akshara | kolkata | 1998 |    234567 |
+|  102 | ALEEFA  | CHENNAI | 1999 |  23434345 |
+|  103 | NILEENA | KANNUR  | 1998 |   2343435 |
+|  104 | AALIYA  | EKM     | 2000 |  43545456 |
+|  105 | SREYA   | THRS    | 2001 | 324234235 |
+|  110 | FIDHA   | MAHE    | 2000 |  23456789 |
++------+---------+---------+------+-----------+
+6 rows in set (0.00 sec)
+
+
+3.    Savepoint
+
+mysql> select * from EMPLOYEE;
++------+---------+----------+------+-----------+
+| SSN  | name    | city     | dob  | adhar_no  |
++------+---------+----------+------+-----------+
+|  101 | akshara | kolkata  | 1998 |    234567 |
+|  102 | ALEEFA  | CHENNAI  | 1999 |  23434345 |
+|  103 | NILEENA | KANNUR   | 1998 |   2343435 |
+|  104 | AALIYA  | EKM      | 2000 |  43545456 |
+|  105 | SREYA   | THRS     | 2001 | 324234235 |
+|  110 | FIDHA   | MAHE     | 2000 |  23456789 |
+|  111 | ASWATHY | VADAKARA | 1998 |    456789 |
++------+---------+----------+------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES(112,'MAANAS','THAMARASSERY',1999,45678987);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SAVEPOINT A;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES(113,'VISHNU','BALUSSEERY',1999,23458987);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SAVEPOINT B;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES(114,'ASWIN','OMASSERY',1999,234658987);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SAVEPOINT C;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from EMPLOYEE;
++------+---------+--------------+------+-----------+
+| SSN  | name    | city         | dob  | adhar_no  |
++------+---------+--------------+------+-----------+
+|  101 | akshara | kolkata      | 1998 |    234567 |
+|  102 | ALEEFA  | CHENNAI      | 1999 |  23434345 |
+|  103 | NILEENA | KANNUR       | 1998 |   2343435 |
+|  104 | AALIYA  | EKM          | 2000 |  43545456 |
+|  105 | SREYA   | THRS         | 2001 | 324234235 |
+|  110 | FIDHA   | MAHE         | 2000 |  23456789 |
+|  111 | ASWATHY | VADAKARA     | 1998 |    456789 |
+|  112 | MAANAS  | THAMARASSERY | 1999 |  45678987 |
+|  113 | VISHNU  | BALUSSEERY   | 1999 |  23458987 |
+|  114 | ASWIN   | OMASSERY     | 1999 | 234658987 |
++------+---------+--------------+------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> ROLLBACK TO B;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from EMPLOYEE;
++------+---------+--------------+------+-----------+
+| SSN  | name    | city         | dob  | adhar_no  |
++------+---------+--------------+------+-----------+
+|  101 | akshara | kolkata      | 1998 |    234567 |
+|  102 | ALEEFA  | CHENNAI      | 1999 |  23434345 |
+|  103 | NILEENA | KANNUR       | 1998 |   2343435 |
+|  104 | AALIYA  | EKM          | 2000 |  43545456 |
+|  105 | SREYA   | THRS         | 2001 | 324234235 |
+|  110 | FIDHA   | MAHE         | 2000 |  23456789 |
+|  111 | ASWATHY | VADAKARA     | 1998 |    456789 |
+|  112 | MAANAS  | THAMARASSERY | 1999 |  45678987 |
+|  113 | VISHNU  | BALUSSEERY   | 1999 |  23458987 |
++------+---------+--------------+------+-----------+
+9 rows in set (0.00 sec)
+
+*********************************************************************************************************************************************************
+
+b) DCL COMMAND
+________________
+          
+Create two users user1, user2
+1.      GRANT
+         ->Give insert and select privilege to user 1 on customer table in the invoice database.
+                    
+          
+          ->Give update and delete privilege to user 2 on all tables in the invoice database.
+                    
+                    
+                    
+                    
+                    
+                    
+        2.      REVOKE
+                   ->Remove delete privilege of user 2.
+                   
+                   
+                   
+                   
