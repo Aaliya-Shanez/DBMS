@@ -74,6 +74,19 @@ mysql> select * from Customer where city="perinthalmaanna"or city= "ktym";
 
 7.    List the customer details who not live in ‘tvm’.
 
+mysql> select * from Customer where city!="ktym";
++-----+---------+-------------+-----------------+-------------+
+| id  | name    | address     | city            | ph_no       |
++-----+---------+-------------+-----------------+-------------+
+| 121 | akshara | manakattu   | kozhikode       | 3454566770  |
+| 122 | nileena | palathinkal | kannur          | 3495854495  |
+| 123 | femi    | kuduimbam   | thrisssur       | 34545343400 |
+| 124 | hiba    | parambil    | perithalmanna   | 1234567780  |
+| 126 | kichu   | nalukatte   | perinthalmaanna | 3445667778  |
+| 127 | vysh    | koledathe   | malappuram      | 3433354400  |
+| 145 | fidha   | pallath     | mahe            | NULL        |
++-----+---------+-------------+-----------------+-------------+
+7 rows in set (0.00 sec)
 
 
 8.    List the customers who have no phone number.
@@ -126,8 +139,15 @@ mysql> select * from Customer order by city asc,name desc;
 8 rows in set (0.00 sec)
 
 
-11. Find the customer names start with ‘A’.
+11. Find the customer names start with ‘f’.
 
+mysql> select name from Customer where name like 'f%';
++-------+
+| name  |
++-------+
+| femi  |
+| fidha |
++-------+
 
 
 12. Find the customer names who have ‘e’ or ‘a’ in them.
@@ -142,4 +162,12 @@ mysql> select * from Customer order by city asc,name desc;
 
 
 
-15. Find the customer names start with ‘a’ and are at least 3 characters in length.
+15. Find the customer names start with ‘f’ and are at least 3 characters in length.
+mysql> select name from Customer where name like 'f___%';
++-------+
+| name  |
++-------+
+| femi  |
+| fidha |
++-------+
+2 rows in set (0.00 sec)
