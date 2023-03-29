@@ -2,6 +2,13 @@
 
 1.    List the customer names of invoice date 3rd February 2023.
 
+ mysql>  SELECT name FROM Customer WHERE id IN (SELECT id FROM INVOICE_MASTER WHERE inv_date='2023-03-15');
++------+
+| name |
++------+
+| vysh |
++------+
+1 row in set (0.01 sec)
 
 2.    List the product name and price of each invoice item.
 
