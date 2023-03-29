@@ -160,12 +160,40 @@ mysql> select name from Customer where name like 'f%';
 
 
 12. Find the customer names who have ‘e’ or ‘a’ in them.
-//
 
+
+mysql>  SELECT name FROM Customer WHERE name LIKE '%a%'OR name LIKE '%e%'; 
++---------+
+| name    |
++---------+
+| aaliya  |
+| akshara |
+| nileena |
+| femi    |
+| hiba    |
+| aali    |
+| fidha   |
++---------+
+7 rows in set (0.00 sec)
 
 13. Find the customer names who have at least 3 characters.
 
 
+mysql> SELECT name FROM Customer WHERE name LIKE '___%';
++---------+
+| name    |
++---------+
+| aaliya  |
+| akshara |
+| nileena |
+| femi    |
+| hiba    |
+| kichu   |
+| vysh    |
+| aali    |
+| fidha   |
++---------+
+9 rows in set (0.00 sec)
 
 14. List the names of customers their names have ‘i’ in second position.
 
