@@ -1,4 +1,7 @@
-1.5  ACCESSING DATABASE: (SUBQUERY)
+                                 1.5  ACCESSING DATABASE: (SUBQUERY)
+                                 
+                                 ************************************
+                                 
 
 1.    List the customer names of invoice date 3rd February 2023.
 
@@ -9,6 +12,8 @@
 | vysh |
 +------+
 1 row in set (0.01 sec)
+**************************************************************************************************************************************
+
 
 2.    List the product name and price of each invoice item.
 
@@ -20,6 +25,8 @@ mysql> SELECT pname ,price from Product where pid in(select pid from INVOICE_ITE
 | ball  |    41 |
 +-------+-------+
 2 rows in set (0.00 sec)
+***************************************************************************************************************************************
+
 
 3.    List the product names, only include their purchased quantity more than 20.
 
@@ -30,6 +37,8 @@ mysql> SELECT pname from Product where pid in(select pid from INVOICE_ITEM WHERE
 | pen   |
 +-------+
 1 row in set (0.00 sec)
+
+********************************************************************************************************************************************
 
 
 4.    Find the product that has no sale.
@@ -45,8 +54,21 @@ mysql> SELECT * from Product where pid NOT  in(select pid from INVOICE_ITEM);
 |  18 | baloon |    31 |
 +-----+--------+-------+
 5 rows in set (0.00 sec)
+********************************************************************************************************************************************
+
 
 5.    List the customer names who purchased the items ‘pen’ and ‘pencil’.
+ 
+ SELECT name FROM Customer WHERE id IN (select id from INVOICE_MASTER where inv_id in (select inv_id from INVOICE_ITEM  where pid in (select pid from Product where pname="PEN" OR pname="PENCIL")));
++---------+
+| name    |
++---------+
+| akshara |
++---------+
+1 row in set (0.01 sec)
+
+***************************************************************************************************************************************************
+
 
 
 6.    Display the purchased product details of the customer ’xyz’.
@@ -58,6 +80,8 @@ mysql> SELECT * FROM Product WHERE pid IN(SELECT pid FROM INVOICE_ITEM WHERE inv
 |  17 | ball  |    41 |
 +-----+-------+-------+
 1 row in set (0.00 sec)
+***************************************************************************************************************************************************
+
 
 
 7.    List the names of all customers who have purchased at least 2 products, make sure that no duplicate names in the result.
