@@ -86,10 +86,14 @@ mysql> SELECT * FROM Product WHERE pid IN(SELECT pid FROM INVOICE_ITEM WHERE inv
 
 7.    List the names of all customers who have purchased at least 2 products, make sure that no duplicate names in the result.
 
-mysql>  SELECT DISTINCT name FROM Customer WHERE id IN(SELECT id FROM INVOICE_MASTER WHERE inv_id IN (SELECT inv_id FROM INVOICE_ITEM GROUP BY inv_id HAVING COUNT(*)>1));
+mysql>  SELECT DISTINCT name FROM Customer WHERE id IN(SELECT id FROM INVOICE_MASTER WHERE inv_id IN (SELECT inv_id FROM INVOICE_ITEM GROUP BY inv_id HAVING COUNT(*)>1));    //WRONG QUERY
 +---------+
 | name    |
 +---------+
 | akshara |
 +---------+
 1 row in set (0.00 sec)
+
+
+//LIST THE TABLES FIRST
+//RESUBMIT
