@@ -12,12 +12,39 @@
 
 2.    List the product name and price of each invoice item.
 
+mysql> SELECT pname ,price from Product where pid in(select pid from INVOICE_ITEM);
++-------+-------+
+| pname | price |
++-------+-------+
+| pen   |   102 |
+| ball  |    41 |
++-------+-------+
+2 rows in set (0.00 sec)
 
-3.    List the product names, only include their purchased quantity more than 3.
+3.    List the product names, only include their purchased quantity more than 20.
+
+mysql> SELECT pname from Product where pid in(select pid from INVOICE_ITEM WHERE quantity >20);
++-------+
+| pname |
++-------+
+| pen   |
++-------+
+1 row in set (0.00 sec)
 
 
 4.    Find the product that has no sale.
 
+mysql> SELECT * from Product where pid NOT  in(select pid from INVOICE_ITEM);
++-----+--------+-------+
+| pid | pname  | price |
++-----+--------+-------+
+|  12 | book   |    51 |
+|  14 | pencil |    51 |
+|  15 | box    |   102 |
+|  16 | bat    |   612 |
+|  18 | baloon |    31 |
++-----+--------+-------+
+5 rows in set (0.00 sec)
 
 5.    List the customer names who purchased the items ‘pen’ and ‘pencil’.
 
