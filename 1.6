@@ -1,0 +1,19 @@
+                  EXP- 1.6 ACCESSING DATABASES: (VIEWS)
+                  *****************************************
+                  
+1. Create a view for customers who have purchased products. 
+
+
+mysql>  CREATE VIEW AI  AS SELECT * FROM Customer WHERE id IN(SELECT id FROM INVOICE_MASTER);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> SELECT * FROM AI;
++-----+---------+-----------+-----------------+-------------+
+| id  | name    | address   | city            | ph_no       |
++-----+---------+-----------+-----------------+-------------+
+| 121 | akshara | manakattu | kozhikode       | 3454566770  |
+| 123 | femi    | kuduimbam | thrisssur       | 34545343400 |
+| 126 | kichu   | nalukatte | perinthalmaanna | 3445667778  |
+| 127 | vysh    | koledathe | malappuram      | 3433354400  |
++-----+---------+-----------+-----------------+-------------+
+4 rows in set (0.00 sec)
