@@ -20,3 +20,16 @@ mysql> SELECT * FROM AI;
 
 
 2. Create a view for invoice products[cust_name,  inv_id, product_id, quantity]
+
+mysql> create view INVOICE_Product as select Customer.name,INVOICE_MASTER.inv_id,Product.pid,INVOICE_ITEM.quantity from Customer INNER JOIN INVOICE_MASTER on Customer.id=INVOICE_MASTER.id INNER JOIN INVOICE_ITEM on INVOICE_MASTER.inv_id=INVOICE_ITEM.inv_id INNER JOIN Product on Product.pid=INVOICE_ITEM.pid;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from INVOICE_Product;
++---------+--------+-----+----------+
+| name    | inv_id | pid | quantity |
++---------+--------+-----+----------+
+| akshara |     12 |  13 |       75 |
+| akshara |     12 |  13 |       75 |
+| kichu   |     16 |  17 |       20 |
++---------+--------+-----+----------+
+3 rows in set (0.01 sec)
