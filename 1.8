@@ -44,5 +44,66 @@ mysql> select * from INVOICE_MASTER;
 |     17 |  127 | 2023-03-15 |
 +--------+------+------------+
 4 rows in set (0.00 sec)
-************************************************************************************************************************************************************
+********************************************************************************************************************************************************
+                                                          EXPERIMENT NO: 1.8 OPTIMIZING DATABASE: (JOINS)
+                                                           ***********************************************
+                           
+ 1 .List the product name and quantity of invoice items
+ 
+ mysql> select Product.pname, INVOICE_ITEM.quantity from Product inner join INVOICE_ITEM on Product.pid=INVOICE_ITEM.pid;
++-------+----------+
+| pname | quantity |
++-------+----------+
+| pen   |       75 |
+| pen   |       75 |
+| ball  |       20 |
++-------+----------+
+3 rows in set (0.01 sec)
+
+2.Display invoice details of the transaction dated ’13-02-2023’.
+
+mysql>  select Customer.name,Product.pname,Product.price,INVOICE_MASTER.inv_id,INVOICE_MASTER.inv_date,INVOICE_ITEM.quantity from Customer inner join INVOICE_MASTER on Customer.id=INVOICE_MASTER.id inner join INVOICE_ITEM on INVOICE_MASTER.inv_id=INVOICE_ITEM.inv_id Inner join Product on Product.pid=INVOICE_ITEM.pid where inv_date='2023-02-13';
++-------+-------+-------+--------+------------+----------+
+| name  | pname | price | inv_id | inv_date   | quantity |
++-------+-------+-------+--------+------------+----------+
+| kichu | ball  |    41 |     16 | 2023-02-13 |       20 |
++-------+-------+-------+--------+------------+----------+
+1 row in set (0.01 sec)
+
+
+
+
+3.   Display the customer name, product name, invoice date of purchased item ‘pen’.
+
+mysql> select Customer.name,Product.pname,INVOICE_MASTER.inv_date from Customer inner join INVOICE_MASTER on Customer.id=INVOICE_MASTER.id inner join INVOICE_ITEM on INVOICE_MASTER.inv_id=INVOICE_ITEM.inv_id inner join Product on Product.pid=INVOICE_ITEM.pid where pname='PEN';
++---------+-------+------------+
+| name    | pname | inv_date   |
++---------+-------+------------+
+| akshara | pen   | 2023-01-20 |
+| akshara | pen   | 2023-01-20 |
++---------+-------+------------+
+2 rows in set (0.00 sec)
+
+4. Display all customer details and invoice details must include customer has not purchased items.
+
+
+mysql> select Customer.name,Product.pname,INVOICE_MASTER.inv_id,INVOICE_MASTER.inv_date from Customer left join INVOICE_MASTER on Customer.id=INVOICE_MASTER.id left join INVOICE_ITEM on INVOICE_MASTER.inv_id=INVOICE_ITEM.inv_id left join Product on Product.pid=INVOICE_ITEM.pid;
++---------+-------+--------+------------+
+| name    | pname | inv_id | inv_date   |
++---------+-------+--------+------------+
+| akshara | pen   |     12 | 2023-01-20 |
+| akshara | pen   |     12 | 2023-01-20 |
+| kichu   | ball  |     16 | 2023-02-13 |
+| aaliya  | NULL  |   NULL | NULL       |
+| nileena | NULL  |   NULL | NULL       |
+| femi    | NULL  |     13 | 2023-01-10 |
+| hiba    | NULL  |   NULL | NULL       |
+| vysh    | NULL  |     17 | 2023-03-15 |
+| aali    | NULL  |   NULL | NULL       |
+| fidha   | NULL  |   NULL | NULL       |
++---------+-------+--------+------------+
+10 rows in set (0.00 sec)
+
+
+
 
