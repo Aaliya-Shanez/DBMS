@@ -1,0 +1,94 @@
+                                 EXPERIMENT NO: 2.1	- PL/SQL PROGRAMS- STORED PROCEDURES 
+                                 ________________________________________________________
+                                 
+1. Create a procedure to display all tables in the invoice database.
+
+mysql> delimiter //
+mysql> create Procedure INVOICE_LIST()
+    -> begin
+    -> select * from Product;
+    -> select * from INVOICE_ITEM;
+    -> select * from INVOICE_MASTER;                                                -> select * from Customer;
+    -> end //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> call INVOICE_LIST()
+    -> //
++-----+--------+-------+
+| pid | pname  | price |
++-----+--------+-------+
+|  12 | book   |    56 |
+|  13 | pen    |   107 |
+|  14 | pencil |    56 |
+|  15 | box    |   107 |
+|  16 | bat    |   617 |
+|  17 | ball   |    46 |
+|  18 | baloon |    36 |
++-----+--------+-------+
+7 rows in set (0.00 sec)
+
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|     12 |   13 |       75 |
+|     12 |   13 |       75 |
+|     16 |   17 |       20 |
++--------+------+----------+
+3 rows in set (0.00 sec)
+
++--------+------+------------+
+| inv_id | id   | inv_date   |
++--------+------+------------+
+|     12 |  121 | 2023-01-20 |
+|     13 |  123 | 2023-01-10 |
+|     16 |  126 | 2023-02-13 |
+|     17 |  127 | 2023-03-15 |
++--------+------+------------+
+4 rows in set (0.00 sec)
+
++-----+---------+-------------+-----------------+-------------+
+| id  | name    | address     | city            | ph_no       |
++-----+---------+-------------+-----------------+-------------+
+| 120 | aaliya  | veede       | ktym            | 456465656   |
+| 121 | akshara | manakattu   | kozhikode       | 3454566770  |
+| 122 | nileena | palathinkal | kannur          | 3495854495  |
+| 123 | femi    | kuduimbam   | thrisssur       | 34545343400 |
+| 124 | hiba    | parambil    | perithalmanna   | 1234567780  |
+| 126 | kichu   | nalukatte   | perinthalmaanna | 3445667778  |
+| 127 | vysh    | koledathe   | malappuram      | 3433354400  |
+| 128 | aali    | baithul     | ktym            |             |
+| 145 | fidha   | pallath     | mahe            | NULL        |
++-----+---------+-------------+-----------------+-------------+
+9 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+
+2. Create a procedure to find greatest of 3 numbers.
+
+delimiter !!
+mysql> create procedure INVOICE_greatest(a int,b int,c int)
+     begin
+     if(a>b) and (a>c) then
+     select a as 'Greatest';
+     elseif(b>a) and (b>c) then
+     select b as 'Greatest';
+     else
+     select c as 'Greatest';
+     end if
+     end !!
+Query OK, 0 rows affected (0.00 sec)
+
+
+mysql> call INVOICE_greatest(4,10,8) !!
++----------+
+| Greatest |
++----------+
+|       10 |
++----------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+3. Create a procedure to display invoice details of a particular customer.                                
+                                 
