@@ -1,0 +1,88 @@
+                          EXPERIMENT NO: 2.3 - PL/SQL PROGRAMS – TRIGGER
+                          **********************************************
+                          
+                          
+ 1. Create a trigger to handle updates to the customer table.
+
+mysql> delimiter //
+mysql> create table customer__1(id int,name varchar(15),address varchar(15),city varchar(25),phno bigint); //
+Query OK, 0 rows affected (0.23 sec)
+
+mysql> create trigger updaterS
+    -> 
+    -> before update
+    -> on Customer for each row
+    -> begin
+    -> insert into customer__1
+    -> values(old.id,old.name,old.address,old.city,old.ph_no);
+    -> end //
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> select * from Customer; //
++-----+---------+-------------+-----------------+-------------+
+| id  | name    | address     | city            | ph_no       |
++-----+---------+-------------+-----------------+-------------+
+| 120 | aaliya  | veede       | ktym            | 456465656   |
+| 121 | akshara | manakattu   | kozhikode       | 3454566770  |
+| 122 | nileena | palathinkal | kannur          | 3495854495  |
+| 123 | femi    | kuduimbam   | thrisssur       | 34545343400 |
+| 124 | hiba    | parambil    | perithalmanna   | 1234567780  |
+| 126 | kichu   | nalukatte   | perinthalmaanna | 3445667778  |
+| 127 | vysh    | koledathe   | malappuram      | 3433354400  |
+| 128 | aali    | baithul     | ktym            |             |
+| 145 | fidha   | pallath     | mahe            | NULL        |
++-----+---------+-------------+-----------------+-------------+
+9 rows in set (0.00 sec)
+
+mysql> update Customer set city='KANNUR' where id=121;
+    -> //
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from customer__1; //
++------+---------+-----------+-----------+------------+
+| id   | name    | address   | city      | phno       |
++------+---------+-----------+-----------+------------+
+|  121 | akshara | manakattu | kozhikode | 3454566770 |
++------+---------+-----------+-----------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from Customer; //
++-----+---------+-------------+-----------------+-------------+
+| id  | name    | address     | city            | ph_no       |
++-----+---------+-------------+-----------------+-------------+
+| 120 | aaliya  | veede       | ktym            | 456465656   |
+| 121 | akshara | manakattu   | KANNUR          | 3454566770  |
+| 122 | nileena | palathinkal | kannur          | 3495854495  |
+| 123 | femi    | kuduimbam   | thrisssur       | 34545343400 |
+| 124 | hiba    | parambil    | perithalmanna   | 1234567780  |
+| 126 | kichu   | nalukatte   | perinthalmaanna | 3445667778  |
+| 127 | vysh    | koledathe   | malappuram      | 3433354400  |
+| 128 | aali    | baithul     | ktym            |             |
+| 145 | fidha   | pallath     | mahe            | NULL        |
++-----+---------+-------------+-----------------+-------------+
+9 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+2.Create a trigger to handle inserts to the product relation ( if price < 5 the set price to 10).
+
+mysql> create trigger product_price
+    -> before insert
+    -> on Product
+    -> for each row
+    -> begin
+    -> if new.price < 5 then
+    -> set new.price=10;
+    -> end if;
+    -> end //
+Query OK, 0 rows affected (0.05 sec)
+
+
+ 
+ 
