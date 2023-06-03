@@ -83,6 +83,24 @@ mysql> create trigger product_price
     -> end //
 Query OK, 0 rows affected (0.05 sec)
 
+mysql> insert into Product values(17,'PENCIL',4);
+    -> //
+Query OK, 1 row affected (0.04 sec)
 
+
+mysql> select * from Product; //
++-----+----------+-------+
+| pid | pname    | price |
++-----+----------+-------+
+|  10 | PENCIL   |    15 |
+|  11 | PEN      |    20 |
+|  12 | BOX      |    56 |
+|  13 | SCALE    |    15 |
+|  14 | NOTEBOOK |    54 |
+|  15 | COLOR    |    76 |
+|  16 | MARKER   |    20 |
+|  17 | PENCIL   |    10 |
++-----+----------+-------+
+8 rows in set (0.00 sec)
  
  
