@@ -1,14 +1,74 @@
+                                         Assignment 4: Retrieving Data
+                                         *****************************
+                                         
+1.      Write a MongoDB query to display the customer documents having city ‘ernakulam’,’kannur’.
 
-1.      Write a MongoDB query to display the customer documents having city ‘ekm’,’tvm’.
+> use INVOICE;
+switched to db INVOICE
+> db.Customer.find({$or:[{"city":"ernakulam"},{"city":"kannur"}]}).pretty();
+{
+	"_id" : ObjectId("64817495614eb252ecc2f516"),
+	"Name" : "aaliya",
+	"city" : "ernakulam",
+	"phno" : "2345678950",
+	"age" : 22
+}
+{
+	"_id" : ObjectId("648174fa614eb252ecc2f518"),
+	"Name" : "nileena",
+	"city" : "kannur",
+	"phno" : "23456478950",
+	"age" : 24
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+2. Write a MongoDB query to display all customer documents who have age >21
+
+
+> db.Customer.find({"age":{$gt:21}}).pretty();
+{
+	"_id" : ObjectId("64817495614eb252ecc2f516"),
+	"Name" : "aaliya",
+	"city" : "ernakulam",
+	"phno" : "2345678950",
+	"age" : 22
+}
+{
+	"_id" : ObjectId("648174fa614eb252ecc2f518"),
+	"Name" : "nileena",
+	"city" : "kannur",
+	"phno" : "23456478950",
+	"age" : 24
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3.      Write a MongoDB query to find customer documents who not live in ‘kannur’.
+
+> db.Customer.find({"city":{$ne:"kannur"}}).pretty();
+{
+	"_id" : ObjectId("64817495614eb252ecc2f516"),
+	"Name" : "aaliya",
+	"city" : "ernakulam",
+	"phno" : "2345678950",
+	"age" : 22
+}
+{
+	"_id" : ObjectId("648174d5614eb252ecc2f517"),
+	"Name" : "akshara",
+	"city" : "thrissur",
+	"phno" : "2343478950",
+	"age" : 21
+}
+{
+	"_id" : ObjectId("6481751b614eb252ecc2f519"),
+	"Name" : "hari",
+	"city" : "palakkad",
+	"phno" : "23467678950",
+	"age" : 21
+}
 
 
 
-
-
-2.     Write a MongoDB query to display all customer documents who have age >50.
-
-
-
-
-
-3.      Write a MongoDB query to find customer documents who not live in ‘tvm’.
