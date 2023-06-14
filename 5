@@ -18,7 +18,7 @@
 { "_id" : "ernakulam", "total" : 1 }
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
+//VERIFIED
 
 3.Write a MongoDB query to find minimum and maximum age in each city.
  db.Customer.aggregate([{$group:{_id:"$city",max_age:{$max:"$age"},min_age:{$min:"$age"}}}])
@@ -28,5 +28,5 @@
 { "_id" : "ernakulam", "max_age" : 22, "min_age" : 22 }
 
 
-
+//VERIFIED
 
