@@ -18,5 +18,50 @@ Successfully added user: {
 	]
 }
 
+ 2. Write a MongoDB query to create the backup for the INVOICE database.
  
+ ksb@ksb-ThinkCentre-Edge72:~$ mongodump --db INVOICE
+2023-06-15T15:19:05.342+0530	writing INVOICE.Product to 
+2023-06-15T15:19:05.342+0530	writing INVOICE.Customer to 
+2023-06-15T15:19:05.343+0530	done dumping INVOICE.Product (4 documents)
+2023-06-15T15:19:05.343+0530	done dumping INVOICE.Customer (4 documents)
+
+ 3) Write a MongoDB query to restore a particular database or a collection.
  
+ >  show dbs
+INVOICE  0.000GB
+admin    0.000GB
+config   0.000GB
+local    0.000GB
+
+> use INVOICE
+switched to db INVOICE
+> db.dropDatabase()
+{ "dropped" : "INVOICE", "ok" : 1 }
+
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+
+ mongorestore --db INVOICE dump/INVOICE
+2023-06-15T15:24:13.585+0530	the --db and --collection args should only be used when restoring from a BSON file. Other uses are deprecated and will not exist in the future; use --nsInclude instead
+2023-06-15T15:24:13.586+0530	building a list of collections to restore from dump/INVOICE dir
+2023-06-15T15:24:13.586+0530	reading metadata for INVOICE.Product from dump/INVOICE/Product.metadata.json
+2023-06-15T15:24:13.586+0530	reading metadata for INVOICE.Customer from dump/INVOICE/Customer.metadata.json
+2023-06-15T15:24:13.749+0530	restoring INVOICE.Product from dump/INVOICE/Product.bson
+2023-06-15T15:24:13.893+0530	restoring INVOICE.Customer from dump/INVOICE/Customer.bson
+2023-06-15T15:24:13.893+0530	no indexes to restore
+2023-06-15T15:24:13.894+0530	finished restoring INVOICE.Product (4 documents)
+2023-06-15T15:24:13.895+0530	no indexes to restore
+2023-06-15T15:24:13.895+0530	finished restoring INVOICE.Customer (4 documents)
+2023-06-15T15:24:13.895+0530	done
+
+ >  show dbs
+INVOICE  0.000GB
+admin    0.000GB
+config   0.000GB
+local    0.000GB
+
+
+
